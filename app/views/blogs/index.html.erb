@@ -1,0 +1,9 @@
+<h1>文章列表</h1>
+
+<a href="/blogs/new">新增文章</a>
+<%# 超連結可用 link_to 方法 %>
+<%# link_to "content", "link"/ path %> 
+<%= link_to "新增文章", "/blogs/new" %> <%# 直接用網址打錯的話不會跳出 error %>
+<%= link_to "新增文章", new_blog_path %> <%# 用 path ，假如打錯重新整理頁面會直接跳出 error，未來要修改路徑比較方便。 %>
+  
+
