@@ -5,11 +5,11 @@ Rails.application.routes.draw do
   # get "/", {to: 'welcome#home'}
   get "/", to: 'welcome#home' # 到 '/'(首頁) , WelcomeController 找 home action
   # get "/about", to: 'welcome#about'
-  # get "/about", to: "pages#about" # controller為複數
+  get "/about", to: "pages#about" # controller為複數
   # "/about", to: "pages#about"
   #get "/about", to: "pages#about"
 
-  resources :blog
+  # resources :blog
   get "/blog", to: "blog#index"
   get "/blog/new", to: "blog#new" 
   post "/blog", to: "blog#create"

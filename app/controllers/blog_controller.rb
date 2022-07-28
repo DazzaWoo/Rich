@@ -10,7 +10,7 @@ class BlogController < ApplicationController
     # render html: "已成功新增網誌"
 
     # 寫入資料庫
-    # redirect_to "/blog"
+    redirect_to "/blog" 
     
   end
 end
