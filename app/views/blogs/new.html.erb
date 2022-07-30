@@ -10,6 +10,7 @@
   <input type="submit" value="新增"> 
 </form>
 
+<%# form_tag 通常用在不需要連接資料(表單) %>
 <h2>form tag 自動產生 authenticity_token</h2>
 <%= form_tag "/blogs" do %>
   標題：
@@ -18,6 +19,18 @@
   <textarea name="content" id="" cols="30" rows="10"></textarea>
   <input type="submit" value="新增">     
 <% end %>
+
+<h2>form for</h2>
+<%# form_for 假如物件有初始值會自動塞入 %>
+<%= form_for @article do |form| %>  
+  標題：
+  <%= form.text_field :title %>
+  內容：
+  <%= form.text_area :content %>
+
+  <%= form.submit %>
+<% end %>
+  
   
 
 

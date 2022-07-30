@@ -3,7 +3,7 @@ class BlogsController < ApplicationController
 
   end
   def new
-
+    @article = Article.new
   end
   def create
     # 在同一個 action 下，不能重複 render 或 redirect_to，假如都沒有會出現狀態 204 沒有 content，在 rails 中，204 狀態為無回應。
@@ -14,8 +14,8 @@ class BlogsController < ApplicationController
 
     # render({html: params})
     render html: params[:content] # params 本身只是看起像 hash ，但本身不是 hash，用字串跟符號都可以取值
-                 #params["content"]
-                #  params.class => ActionController::Parameters
+                 # params["content"]
+                 # params.class => ActionController::Parameters
   end
 end
 
