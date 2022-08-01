@@ -44,12 +44,23 @@ class ArticlesController < ApplicationController
   def update
     @article = Article.find(params[:id])
     if @article.update(article_params)
-      redirect_to '/', notice: "Article updated!"
+      redirect_to blogs_path, notice: "Article updated!"
     else
-      render :edit
+      # redirect_to edit_article_path(@article)
+
+      render "/articles/edit"
+      # render :edit
+      # 51、52行相同
+      # 借 edit aciton 的頁面來用
     end
   end
-
+  def destroy
+    @article = Article.find(params[:id])
+    if @article.destroy
+      redirect_to blogs_path, notice: "Article destroied!"
+    end
+  end
+  
   private
   def article_params
     params.require(:article).permit(:title, :content)
