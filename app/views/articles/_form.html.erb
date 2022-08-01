@@ -1,11 +1,12 @@
-<% if @article.errors.any? %>
-  <% @article.errors.full_messages.each do |message| %>
+<% if article.errors.any? %>
+  <% article.errors.full_messages.each do |message| %>
     <h2><%= message %></h2>
   <% end %>
 <% end %>
 
 <%# form_for 假如物件有初始值會自動塞入 %>
-<%= form_for @article do |form| %>  
+<%# @article 改為 article 將值從 new、edit.html.erb 丟進來 %>
+<%= form_for article do |form| %>   
   標題：
   <%= form.text_field :title %>
   內容：
