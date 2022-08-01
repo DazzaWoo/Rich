@@ -1,4 +1,11 @@
 class ArticlesController < ApplicationController
+
+  before_action :find_article, only: [:show, :edit, :update, :destroy]
+
+  # rescue 可以為共用的方法，應寫在 ApplicationController 裡
+  # 從 controller 層級判斷是否有出現 ActiveRecord::RecordNotFound
+  # rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
+
   def show
     # render html: params
 
@@ -15,8 +22,17 @@ class ArticlesController < ApplicationController
     # Article.where(id: 1) => return []; 
     # 找第一個 Article.where(id: 1).first
     # where 一次找到一群; find、find_by 一次找一筆資料
-    
-    @article = Article.find(params[:id])
+
+    # Exception 例外情形 並非 error
+    # 用 begin.. rescue 預期壞掉的情況
+    # begin
+    #   @article = Article.find(params[:id])
+    # rescue => exception
+    #   redirect_to "/"
+    # end
+
+    # @article = Article.find(params[:id]) # 轉移到 before_aciton
+
   end
   def create
     # 批次寫入
@@ -39,10 +55,9 @@ class ArticlesController < ApplicationController
     end
   end
   def edit
-    @article = Article.find(params[:id])
+    # @article = Article.find(params[:id])
   end
   def update
-    @article = Article.find(params[:id])
     if @article.update(article_params)
       redirect_to blogs_path, notice: "Article updated!"
     else
@@ -55,7 +70,7 @@ class ArticlesController < ApplicationController
     end
   end
   def destroy
-    @article = Article.find(params[:id])
+    # @article = Article.find(params[:id])
     if @article.destroy
       redirect_to blogs_path, notice: "Article destroied!"
     end
@@ -65,4 +80,10 @@ class ArticlesController < ApplicationController
   def article_params
     params.require(:article).permit(:title, :content)
   end
+  def find_article
+    @article = Article.find(params[:id])
+  end
+  # def record_not_found
+  #   redirect_to '/'
+  # end
 end
