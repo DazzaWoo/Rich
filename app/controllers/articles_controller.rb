@@ -1,4 +1,23 @@
 class ArticlesController < ApplicationController
+  def show
+    # render html: params
+
+    # 11:20
+    # ex: 找第 3 篇文章
+    # find 只能帶數字, find_by 可以帶更多參數
+    # 用find_by 找不到 return nil
+    #   find_by! 找不到一樣回傳錯誤訊息
+    #   find 找不到 return error (ActiveRecord::RecordNotFound)
+    # Article.find(3)
+    # Article.find_by(id: 3)
+
+    # ps.另外一種拿法
+    # Article.where(id: 1) => return []; 
+    # 找第一個 Article.where(id: 1).first
+    # where 一次找到一群; find、find_by 一次找一筆資料
+    
+    @article = Article.find(params[:id])
+  end
   def create
     # 批次寫入
     # render html: params[:article]
@@ -19,7 +38,17 @@ class ArticlesController < ApplicationController
       render new_blog_path # => 借 app/views/blogs/new.html.erb 來用
     end
   end
-
+  def edit
+    @article = Article.find(params[:id])
+  end
+  def update
+    @article = Article.find(params[:id])
+    if @article.update(article_params)
+      redirect_to '/', notice: "Article updated!"
+    else
+      render :edit
+    end
+  end
 
   private
   def article_params

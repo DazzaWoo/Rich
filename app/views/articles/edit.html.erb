@@ -1,0 +1,21 @@
+<h1>update article</h1>
+<% if @article.errors.any? %>
+  <% @article.errors.full_messages.each do |message| %>
+    <h2><%= message %></h2>
+  <% end %>
+<% end %>
+
+<%# form_for 假如物件有初始值會自動塞入 %>
+<%= form_for @article do |form| %>  
+  標題：
+  <%= form.text_field :title %>
+  內容：
+  <%= form.text_area :content %>
+
+  <%= form.submit "修改預設按鈕 value " %>
+<% end %>
+  
+  
+
+
+

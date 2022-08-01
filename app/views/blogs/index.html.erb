@@ -11,12 +11,19 @@ new_blog_path() is a method
 another is 
 new_blog_url
 
-url timing
-we user forgoet theri password
+url 使用時機
+when user forgoet their password
 they recieve an eamil 
 in the eamil with a url link
 this is the time to use new_blog_"url"
 
 %>
-
+<ul>
+  <% @articles.each do |article| %>
+    <li>
+      <%= link_to article.title, article %>
+      <%= link_to "edit", edit_article_path(article) %>
+    </li>    
+  <% end %>
+</ul>
 

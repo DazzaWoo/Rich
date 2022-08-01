@@ -4,7 +4,8 @@ Rails.application.routes.draw do
   # 使用 get方法 到 '/' 網址 , 到 WelcomeController 找 home action
   # get("/", {to: 'welcome#home'})
   # get "/", {to: 'welcome#home'}
-  get "/", to: 'welcome#home' 
+  # get "/", to: 'welcome#home' 
+  get "/", to: 'blogs#index' 
   # get "/about", to: 'welcome#about'
   get "/about", to: "pages#about" # controller為複數
   # "/about", to: "pages#about"
