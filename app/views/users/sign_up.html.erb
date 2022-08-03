@@ -1,0 +1,32 @@
+<h1>Sign Up</h1>
+<%# 
+  form_for 預期會找 users_path  
+  假如必須要 path = /user/sign_up; 解法： 在 routes + 上 path: "user"
+%> 
+<%# 
+  form_for Model
+  form_tag 
+
+  form_with(model: @user)
+
+  form_with url "/"
+
+ %>
+
+<%= form_with model: @user do |form| %>
+  <div>
+    <%= form.label :eamil, "Email" %>
+    <%= form.email_field :eamil %>
+  </div>
+  <div>
+    <%= form.label :password, "Password" %>
+    <%= form.password_field :password %>
+  </div>
+  <div>
+    <%= form.label :password, "密碼確認" %>
+    <%= form.password_field :password %>
+  </div>
+  <%= form.submit  %>
+  <br>
+<% end %>
+  

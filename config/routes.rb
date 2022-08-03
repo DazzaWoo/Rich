@@ -31,7 +31,18 @@ Rails.application.routes.draw do
                    # , except: [:index, :new] # except 除了 :index, :new 以外，其餘都顯示      
   # 在終端機找路徑可以用 rails routes -c blog 只找到跟 blog 有關的路徑
   resources :articles
-  resources :uers
+
+  # 用 resource 在路徑上不會有 id
+  # resource :users 
+  # 新增客製化路徑（可放多個）get :sing_up
+  resource :users, expect: [:new, :destroy] do
+    get :sign_up
+  end
+  # 假如 resource :user 要單數 後面要再加上 path: "user"
+  # resource :users, expect: [:new, :destroy], path: "user" do
+  #   get :sign_up
+  # end
+
 end
 
 # Prefix Verb   URI Pattern              Controller#Action
