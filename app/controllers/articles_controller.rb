@@ -48,7 +48,7 @@ class ArticlesController < ApplicationController
     @article = Article.new(article_params)
 
     if @article.save
-      redirect_to blogs_path
+      redirect_to blogs_path, notice: "文章新增成功"
     else
       # redirect_to '/blogs/new'     
       render new_blog_path # => 借 app/views/blogs/new.html.erb 來用
@@ -59,7 +59,7 @@ class ArticlesController < ApplicationController
   end
   def update
     if @article.update(article_params)
-      redirect_to blogs_path, notice: "Article updated!"
+      redirect_to blogs_path, notice: "文章修改成功"
     else
       # redirect_to edit_article_path(@article)
 
@@ -72,7 +72,7 @@ class ArticlesController < ApplicationController
   def destroy
     # @article = Article.find(params[:id])
     if @article.destroy
-      redirect_to blogs_path, notice: "Article destroied!"
+      redirect_to blogs_path, notice: "文章刪除成功"
     end
   end
   

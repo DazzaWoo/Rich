@@ -11,6 +11,14 @@
   </head>
 
   <body>
+    <%# <% if notice %> 
+      <%# <div class="flash"> %>
+        <%# <%= notice %> 
+        <%# <%= render "shared/flash" if notice %> 
+      <%# </div> %>
+    <%# <% end %> 
+    <%# 上方等於 21 行 %>
+    <%= render "shared/flash" if notice %>
     <%= yield %>
   </body>
 </html>

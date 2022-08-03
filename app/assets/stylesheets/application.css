@@ -13,10 +13,21 @@
  *= require_tree .
  *= require_self
  */
+* {
+  margin: 0;
+  padding: 0;
+}
 .field_with_errors {
   display: inline;
 }
 .field_with_errors input[type="text"] {
   border: 2px solid tomato;
 }
-
+.flash {
+  color: white;
+  background-color: green;
+  margin-top: 25px;
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+}

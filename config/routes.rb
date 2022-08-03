@@ -32,11 +32,15 @@ Rails.application.routes.draw do
   # 在終端機找路徑可以用 rails routes -c blog 只找到跟 blog 有關的路徑
   resources :articles
 
+  # 建立 sessions
+  resource :sessions, only: [:create, :destroy]
+
   # 用 resource 在路徑上不會有 id
   # resource :users 
   # 新增客製化路徑（可放多個）get :sing_up
-  resource :users, expect: [:new, :destroy] do
+  resource :users, except: [:new, :destroy] do
     get :sign_up
+    get :sign_in
   end
   # 假如 resource :user 要單數 後面要再加上 path: "user"
   # resource :users, expect: [:new, :destroy], path: "user" do
