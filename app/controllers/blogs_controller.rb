@@ -1,6 +1,9 @@
 class BlogsController < ApplicationController
   def index
     @articles = Article.all
+    @ad_color1 = "紅"
+    @ad_color2 = "黃"
+    @ad_color3 = "綠"
   end
   def new
     @article = Article.new

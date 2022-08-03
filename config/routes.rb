@@ -31,6 +31,7 @@ Rails.application.routes.draw do
                    # , except: [:index, :new] # except 除了 :index, :new 以外，其餘都顯示      
   # 在終端機找路徑可以用 rails routes -c blog 只找到跟 blog 有關的路徑
   resources :articles
+  resources :uers
 end
 
 # Prefix Verb   URI Pattern              Controller#Action

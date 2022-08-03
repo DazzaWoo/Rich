@@ -18,13 +18,19 @@ in the eamil with a url link
 this is the time to use new_blog_"url"
 
 %>
+
+<%= render "shared/ad", ad_color: @ad_color1  %>
+<%= render "shared/ad", ad_color: @ad_color2  %>
+<%= render "shared/ad", ad_color: @ad_color3  %>
+
 <ul>
   <% @articles.each do |article| %>
     <li>
       <%= link_to article.title, article %>
       <%= link_to "edit", edit_article_path(article) %>
-      <%= link_to "delete", article, method: "delete", data: {confirm: "Are you sure?"} %>
+      <%= link_to "delete", article, method: "delete", data: { confirm: "Are you sure?" } %>
+      <%= link_to "delete", article, data: { method: "delete" ,confirm: "Are you sure?" } %>
+      <%= link_to "delete", article, data: { method: "delete" ,ooxx: 123 } %>
     </li>    
   <% end %>
 </ul>
-
