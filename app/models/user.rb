@@ -1,4 +1,7 @@
 class User < ApplicationRecord
+  # relationships
+  has_many :articles
+  # validation
   validates :email, presence: true, uniqueness: true
             # 驗證 email 格式 format: { with: /\A[a-zA-Z]+\z/ }
 
@@ -13,6 +16,10 @@ class User < ApplicationRecord
   # 在密碼前後 + 亂碼 如：xxfdkfjdlfjdlfj123456dfjkdljflkd
   before_save :sayhi
   before_create :encrypt_password
+
+  # def own?(article)
+  #   article.user == self
+  # end
 
   def self.login(user_params)
     email = user_params[:email]
@@ -35,3 +42,4 @@ class User < ApplicationRecord
     puts "hi"
   end
 end
+

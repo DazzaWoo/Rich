@@ -1,6 +1,16 @@
+# Authentication 認證
+# Authorization 授權
+# 假如登入 facebook ＝ 有得到 facebook 的“認證”，但是不能更改別人的文章 = 沒有得到“授權”
+
 class ArticlesController < ApplicationController
 
-  before_action :find_article, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!, except: [:show]
+
+  # before_action :find_article, only: [:show, :edit, :update, :destroy]
+  # before_action :find_article, only: [:show]
+
+  # before_aciton :check_permission, only: [:edit, :udpate, :destroy]
+  before_action :find_user_article, only: [:edit, :update, :destroy]
 
   # rescue 可以為共用的方法，應寫在 ApplicationController 裡
   # 從 controller 層級判斷是否有出現 ActiveRecord::RecordNotFound
@@ -33,6 +43,9 @@ class ArticlesController < ApplicationController
 
     # @article = Article.find(params[:id]) # 轉移到 before_aciton
 
+    # edit update destroy 改用者用者角度去找文章，只剩 show 方法使用 article 角度去找文章就直接放在 show 方法裡
+    @article = Article.find(params[:id])
+
   end
   def create
     # 批次寫入
@@ -45,7 +58,16 @@ class ArticlesController < ApplicationController
 
     # @article = Article.new(params[:article])
     # @article = Article.new(clean_params)
-    @article = Article.new(article_params)
+
+    # 從文章角度創建文章
+    # @article = Article.new(article_params)
+    # 因 belongs_to 方法，所以有 .user 方法
+    # @article.user = current_user
+
+    # 從使用者角度創建文章
+    # 等同 54、56行
+    @article = current_user.articles.new(article_params)
+
 
     if @article.save
       redirect_to blogs_path, notice: "文章新增成功"
@@ -56,6 +78,10 @@ class ArticlesController < ApplicationController
   end
   def edit
     # @article = Article.find(params[:id])
+    # if @article.user != current_user
+    # if not current_user.own?(@article)
+    #   redirect_to '/', notice: "權限不足"
+    # end
   end
   def update
     if @article.update(article_params)
@@ -71,9 +97,10 @@ class ArticlesController < ApplicationController
   end
   def destroy
     # @article = Article.find(params[:id])
-    if @article.destroy
-      redirect_to blogs_path, notice: "文章刪除成功"
-    end
+    # @article.destroy
+    @article.update(delete_at: Time.current)
+    redirect_to blogs_path, notice: "文章刪除成功"
+    
   end
   
   private
@@ -86,4 +113,12 @@ class ArticlesController < ApplicationController
   # def record_not_found
   #   redirect_to '/'
   # end
+  # def check_permission
+  #   if not current_user.own?(@article)
+  #     redirect_to '/', notice: "權限不足"
+  #   end
+  # end
+  def find_user_article
+    @article = current_user.articles.find(params[:id])
+  end
 end

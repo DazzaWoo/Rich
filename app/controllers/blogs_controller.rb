@@ -1,12 +1,21 @@
 class BlogsController < ApplicationController
+  # include UsersHelpero
+
+  before_action :authenticate_user!, only: [:new]
+
   def index
-    @articles = Article.all
+    @articles = Article.where(delete_at: nil).order(id: :desc)
+    # @articles = Article.where(deleted_at: nil).order(id: :desc)
     @ad_color1 = "紅"
     @ad_color2 = "黃"
     @ad_color3 = "綠"
   end
   def new
-    @article = Article.new
+    # if user_signed_in?
+      @article = Article.new
+    # else
+      # redirect_to sign_in_users_path
+    # end    
   end
   def create
     # 在同一個 action 下，不能重複 render 或 redirect_to，假如都沒有會出現狀態 204 沒有 content，在 rails 中，204 狀態為無回應。

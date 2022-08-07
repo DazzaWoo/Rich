@@ -13,10 +13,10 @@
  *= require_tree .
  *= require_self
  */
-* {
+/* * {
   margin: 0;
   padding: 0;
-}
+} */
 .field_with_errors {
   display: inline;
 }
@@ -30,4 +30,7 @@
   padding: 20px;
   display: flex;
   justify-content: space-between;
+}
+nav li {
+  font-size: 40px;
 }

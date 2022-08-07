@@ -11,6 +11,8 @@
   </head>
 
   <body>
+    <h1>123456</h1>
+    <%# User: <%= current_user.email if current_user %> 
     <%# <% if notice %> 
       <%# <div class="flash"> %>
         <%# <%= notice %> 
@@ -19,6 +21,7 @@
     <%# <% end %> 
     <%# 上方等於 21 行 %>
     <%= render "shared/flash" if notice %>
+    <%= render "shared/navbar" %>
     <%= yield %>
   </body>
 </html>
