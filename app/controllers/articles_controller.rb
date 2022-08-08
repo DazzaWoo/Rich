@@ -97,15 +97,14 @@ class ArticlesController < ApplicationController
   end
   def destroy
     # @article = Article.find(params[:id])
-    # @article.destroy
-    @article.update(delete_at: Time.current)
+    @article.destroy
+    # @article.update(delete_at: Time.current)
     redirect_to blogs_path, notice: "文章刪除成功"
-    
   end
   
   private
   def article_params
-    params.require(:article).permit(:title, :content)
+    params.require(:article).permit(:title, :content, :pincode)
   end
   def find_article
     @article = Article.find(params[:id])

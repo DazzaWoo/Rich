@@ -5,7 +5,6 @@ class BlogsController < ApplicationController
 
   def index
     # @articles = Article.where(deleted_at: nil).order(id: :desc)
-    # @articles = Article.where(delete_at: nil).order(id: :desc)
     # @articles = Article.avaliable.order(id: :desc)
     @articles = Article.order(id: :desc)
     

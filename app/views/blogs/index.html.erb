@@ -31,6 +31,7 @@ this is the time to use new_blog_"url"
 <ul>
   <% @articles.each do |article| %>
     <li>
+      <%= "O" if article.pincode.present? %>
       <%= link_to article.title, article %>
       <%= link_to "edit", edit_article_path(article) %>
       <%= link_to "delete", article, method: "delete", data: { confirm: "Are you sure?" } %>

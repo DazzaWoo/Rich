@@ -1,2 +1,16 @@
 <h1><%= @article.title %></h1>
-<p><%= @article.content %></p>
+
+<p>
+<%# present 是否有值（存在） %>
+  <% if @article.pincode.present? %>
+    <%# <%= form_with model: @article, url: unclock_article_path(@article), method: "patch" do |form| %> 
+    <%# <%= form_with url: unlock_article_path(@article), method: "patch" do |form| %>
+    <%= form_with url: unlock_article_path, method: "patch" do |form| %>
+      <%# 請輸入密碼：<input type="text"> %>
+      請輸入密碼：<%= form.text_field :pincode %>
+      <%= form.submit '解鎖' %>
+    <% end %>  
+  <% else %>
+    <%= @article.content %>
+  <% end %>
+</p>

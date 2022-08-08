@@ -1,4 +1,6 @@
 class Article < ApplicationRecord
+  acts_as_paranoid
+
   # relationships
   belongs_to :user
   # validates (:title, {prsence: true})  
@@ -12,7 +14,15 @@ class Article < ApplicationRecord
   # Lambda, Callback function
   # scope :avaliable, -> { where (delete_at: nil) }
   # default_scope 所以有的找法都會加上
-  default_scope { where (delete_at: nil) }
+  # default_scope { where (delete_at: nil) }
+
+  # 假如搜尋某一個不想加 default scope，但其他需要 default_scope
+  # Article.unscope(:where).find_by(id: 2)
+
+  # def destroy
+  #   @article.update(delete_at: Time.current)
+  # end  
+  
 end
 
 =begin

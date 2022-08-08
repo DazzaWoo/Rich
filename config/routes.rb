@@ -30,12 +30,25 @@ Rails.application.routes.draw do
                    # , only: [:index, :new] # only 只要顯示 ：index, :new 路徑
                    # , except: [:index, :new] # except 除了 :index, :new 以外，其餘都顯示      
   # 在終端機找路徑可以用 rails routes -c blog 只找到跟 blog 有關的路徑
-  resources :articles
+  resources :articles do
+    # member 會有 id
+    member do
+      patch :unlock
+    end
+    # member 另一種寫法
+    # patch :unclock, on: :member
+
+    # collection 沒有 id。 要幫所有東西做事可以使用 collection
+    # collection do
+    #   patch :reports
+    # end
+    # patch :reports, on: :collection
+  end
 
   # 建立 sessions
   resource :sessions, only: [:create, :destroy]
 
-  # 用 resource 在路徑上不會有 id
+  # 用 resource(單數) 在路徑上不會有 id
   # resource :users 
   # 新增客製化路徑（可放多個）get :sing_up
   resource :users, except: [:new, :destroy] do
