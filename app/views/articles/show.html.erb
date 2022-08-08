@@ -2,15 +2,44 @@
 
 <p>
 <%# present 是否有值（存在） %>
-  <% if @article.pincode.present? %>
+  <%# <% if @article.pincode.present? && !session[:unlock_articles]&.include?(@article.id) %>
+  <% if is_locked?(@article) %> 
+    <%# <% if session[:unlock_articles]&.include?(params[:id].to_i) %>
+      <%# <%= @article.content %>  
     <%# <%= form_with model: @article, url: unclock_article_path(@article), method: "patch" do |form| %> 
     <%# <%= form_with url: unlock_article_path(@article), method: "patch" do |form| %>
-    <%= form_with url: unlock_article_path, method: "patch" do |form| %>
-      <%# 請輸入密碼：<input type="text"> %>
-      請輸入密碼：<%= form.text_field :pincode %>
-      <%= form.submit '解鎖' %>
-    <% end %>  
+     <%= form_with url: unlock_article_path, method: "patch" do |form| %>
+        <%# 請輸入密碼：<input type="text"> %>
+        請輸入密碼：<%= form.text_field :pincode %>
+        <%= form.submit '解鎖' %>
+      <% end %>
   <% else %>
-    <%= @article.content %>
+      <%# <%= form_with url: unlock_article_path, method: "patch" do |form| %>
+        <%# 請輸入密碼：<input type="text"> %>
+        <%# 請輸入密碼：<%= form.text_field :pincode %>
+        <%# <%= form.submit '解鎖'  %>
+    <%# <% end %>  
+  <%# <% else  %>
+    <%= @article.content %>  
   <% end %>
 </p>
+
+<section>
+  <h4>留言區</h4>
+  <%#= form_with model: @comment, url: article_comments_path(@article) do |form| %>
+  <%# 在 routes 為 article 包 comment 上面寫法可改為下方寫法，為簡寫 %>
+  <%= form_with model: [@article, @comment] do |form| %>  
+    <%= form.text_area :content %>
+    <%= form.submit '送出' %>
+  <% end %>
+    
+  <ul>
+    <% @comments.each do |comment| %>
+    <li>
+      <%= comment.content %>
+      <%= link_to "[X]", comment, method: 'delete', data: { confirm: "Are you sure?" } %>
+    </li>
+    <% end %>
+  </ul>  
+</section>
+

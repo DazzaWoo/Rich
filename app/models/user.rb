@@ -1,6 +1,7 @@
 class User < ApplicationRecord
   # relationships
   has_many :articles
+  has_many :comments
   # validation
   validates :email, presence: true, uniqueness: true
             # 驗證 email 格式 format: { with: /\A[a-zA-Z]+\z/ }

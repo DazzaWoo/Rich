@@ -4,13 +4,14 @@
 
 class ArticlesController < ApplicationController
 
-  before_action :authenticate_user!, except: [:show]
+  before_action :authenticate_user!, except: [:show, :unlock]
 
   # before_action :find_article, only: [:show, :edit, :update, :destroy]
   # before_action :find_article, only: [:show]
 
   # before_aciton :check_permission, only: [:edit, :udpate, :destroy]
   before_action :find_user_article, only: [:edit, :update, :destroy]
+  before_action :find_article, only: [:show, :unclock]
 
   # rescue 可以為共用的方法，應寫在 ApplicationController 裡
   # 從 controller 層級判斷是否有出現 ActiveRecord::RecordNotFound
@@ -44,8 +45,10 @@ class ArticlesController < ApplicationController
     # @article = Article.find(params[:id]) # 轉移到 before_aciton
 
     # edit update destroy 改用者用者角度去找文章，只剩 show 方法使用 article 角度去找文章就直接放在 show 方法裡
-    @article = Article.find(params[:id])
+    # @article = Article.find(params[:id])
 
+    @comment = Comment.new
+    @comments = @article.comments.order(id: :desc)
   end
   def create
     # 批次寫入
@@ -101,6 +104,17 @@ class ArticlesController < ApplicationController
     # @article.update(delete_at: Time.current)
     redirect_to blogs_path, notice: "文章刪除成功"
   end
+
+  def unlock
+    find_article
+    if @article.pincode == params[:pincode]
+      # render :show
+      set_unlock_articles(@article.id)
+      redirect_to article_path(@article)
+    else
+      redirect_to article_path(@article), notice: "密碼錯誤"
+    end
+  end  
   
   private
   def article_params
@@ -120,4 +134,15 @@ class ArticlesController < ApplicationController
   def find_user_article
     @article = current_user.articles.find(params[:id])
   end
+
+  def set_unlock_articles(article_id)
+    # rails 內建 session; session 結構類似 hash，會存瀏覽器的 cookie，server 會存有 session
+    if session[:unlock_articles]
+      session[:unlock_articles] << article_id
+      session[:unlock_articles].uniq!
+    else
+      # 第一次進來把 session 設為 article_id
+      session[:unlock_articles] = [article_id]
+    end    
+  end 
 end

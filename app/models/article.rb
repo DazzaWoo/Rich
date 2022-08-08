@@ -3,6 +3,8 @@ class Article < ApplicationRecord
 
   # relationships
   belongs_to :user
+  has_many :comments
+  
   # validates (:title, {prsence: true})  
   validates :title, presence: true, length: { minimum: 2 }
 

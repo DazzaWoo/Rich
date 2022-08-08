@@ -30,7 +30,11 @@ Rails.application.routes.draw do
                    # , only: [:index, :new] # only 只要顯示 ：index, :new 路徑
                    # , except: [:index, :new] # except 除了 :index, :new 以外，其餘都顯示      
   # 在終端機找路徑可以用 rails routes -c blog 只找到跟 blog 有關的路徑
+  resources :comments, only: [:show, :edit, :update, :destroy]
   resources :articles do
+    # resources :comments, only: [:index, :new, :create]
+    resources :comments, shallow: true, only: [:create, :destroy]
+
     # member 會有 id
     member do
       patch :unlock
