@@ -1,4 +1,4 @@
-class WelcomeController < ApplicationController
+lclass WelcomeController < ApplicationController
   def home
     # 渲染 html
     # render {html: "<h1>Welcome</h1>"} => {} 可省略

@@ -4,8 +4,11 @@ class BlogsController < ApplicationController
   before_action :authenticate_user!, only: [:new]
 
   def index
-    @articles = Article.where(delete_at: nil).order(id: :desc)
     # @articles = Article.where(deleted_at: nil).order(id: :desc)
+    # @articles = Article.where(delete_at: nil).order(id: :desc)
+    # @articles = Article.avaliable.order(id: :desc)
+    @articles = Article.order(id: :desc)
+    
     @ad_color1 = "紅"
     @ad_color2 = "黃"
     @ad_color3 = "綠"

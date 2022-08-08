@@ -3,6 +3,16 @@ class Article < ApplicationRecord
   belongs_to :user
   # validates (:title, {prsence: true})  
   validates :title, presence: true, length: { minimum: 2 }
+
+  # 所有商業邏輯可以整理在同一個地方，以便後續維護。
+  # 可用 scope 或 類別方法
+  # def self.available
+  #   where(delete_at: nil)
+  # end
+  # Lambda, Callback function
+  # scope :avaliable, -> { where (delete_at: nil) }
+  # default_scope 所以有的找法都會加上
+  default_scope { where (delete_at: nil) }
 end
 
 =begin
