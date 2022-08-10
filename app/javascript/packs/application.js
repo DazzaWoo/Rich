@@ -12,11 +12,11 @@ Rails.start();
 Turbolinks.start();
 ActiveStorage.start();
 
-document.addEventListener("DOMContentLoaded", () => {
-  const likeBtn = document.querySelector("#likeBtn");
-  likeBtn.addEventListener("click", () => {
-    console.log(123);
-  });
-});
+// document.addEventListener("DOMContentLoaded", () => {
+//   const likeBtn = document.querySelector("#likeBtn");
+//   likeBtn.addEventListener("click", () => {
+//     console.log(123);
+//   });
+// });
 
 import "controllers"

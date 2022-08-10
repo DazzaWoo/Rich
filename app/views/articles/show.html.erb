@@ -1,5 +1,8 @@
 <h1><%= @article.title %></h1>
-<button id="likeBtn">加到最愛</button>
+
+<section data-controller="like" data-article-id="<%= @article.id %>">
+  <button id="likeBtn" data-action="click->like#like_article">加到最愛</button>
+</section>
 <%# <%= link_to "* star 加到最愛", like_api_v1_article_path(@article), method: "post" %> 
 
 <p>
