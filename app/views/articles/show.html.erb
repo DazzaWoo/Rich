@@ -1,4 +1,6 @@
 <h1><%= @article.title %></h1>
+<button id="likeBtn">加到最愛</button>
+<%# <%= link_to "* star 加到最愛", like_api_v1_article_path(@article), method: "post" %> 
 
 <p>
 <%# present 是否有值（存在） %>
@@ -28,18 +30,23 @@
   <h4>留言區</h4>
   <%#= form_with model: @comment, url: article_comments_path(@article) do |form| %>
   <%# 在 routes 為 article 包 comment 上面寫法可改為下方寫法，為簡寫 %>
-  <%= form_with model: [@article, @comment] do |form| %>  
+  <%# 加上 local false 就會改用 xhr 通訊協定去傳送，一般使用 http 通訊協定傳送。 %>
+  <%= form_with model: [@article, @comment], local: false do |form| %>  
     <%= form.text_area :content %>
     <%= form.submit '送出' %>
   <% end %>
     
-  <ul>
-    <% @comments.each do |comment| %>
-    <li>
-      <%= comment.content %>
-      <%= link_to "[X]", comment, method: 'delete', data: { confirm: "Are you sure?" } %>
-    </li>
-    <% end %>
+  <ul class="comment-list">
+    <%# <% @comments.each do |comment| %> 
+    <%# <li> %>
+      <%# <%= comment.content %>
+      <%# <%= link_to "[X]", comment, method: 'delete', data: { confirm: "Are you sure?" } %> 
+    <%# </li> %>
+    <%#= render 'comments/comment', comment: comment %> <%# 在迴圈裡作 render ， 此用法效能不好，會吃掉記憶體 %>
+    <%= render @comments %>
+    <%# views/comments/_comment.html.erb
+    區域變數 comment %>
+    <%# <% end %> 
   </ul>  
 </section>
 

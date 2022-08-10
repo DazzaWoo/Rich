@@ -7,7 +7,7 @@ class CommentsController < ApplicationController
     # render html: params
     @comment = @article.comments.new(comment_params)
     if @comment.save
-      redirect_to @article, notice: "留言成功"
+      # redirect_to @article, notice: "留言成功"
     else
       redirect_to @article, notice: "留言失敗"
     end

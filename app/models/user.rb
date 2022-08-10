@@ -2,6 +2,10 @@ class User < ApplicationRecord
   # relationships
   has_many :articles
   has_many :comments
+  has_many :like_articles
+  has_many :liked_articles, through: :like_articles, source: :article # 不能照慣例寫實需要另外寫 foreign_key
+
+
   # validation
   validates :email, presence: true, uniqueness: true
             # 驗證 email 格式 format: { with: /\A[a-zA-Z]+\z/ }

@@ -49,6 +49,19 @@ Rails.application.routes.draw do
     # patch :reports, on: :collection
   end
 
+  # /api/v1/artilces/6/like
+  namespace :api do
+    namespace :v1 do
+      resources :articles, only: [] do
+        member do
+          post :like
+        end
+      end
+    end
+
+
+  end
+
   # 建立 sessions
   resource :sessions, only: [:create, :destroy]
 
@@ -60,7 +73,7 @@ Rails.application.routes.draw do
     get :sign_in
   end
   # 假如 resource :user 要單數 後面要再加上 path: "user"
-  # resource :users, expect: [:new, :destroy], path: "user" do
+  # resource :users, except: [:new, :destroy], path: "user" do
   #   get :sign_up
   # end
 

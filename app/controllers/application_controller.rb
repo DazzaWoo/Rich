@@ -18,7 +18,7 @@ class ApplicationController < ActionController::Base
     # 判斷是否已經有資料，沒有的話就近資料庫撈資料
     # 此用法為 Ruby memoizae
     # @_current_user = @_current_user || User.find_by(id: session[:user_session])
-    @_current_user ||= User.find_by(id: session[:user_session])
+    @current_user ||= User.find_by(id: session[:user_session])
   end
 
   def user_signed_in?
