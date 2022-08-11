@@ -1,4 +1,4 @@
-lclass WelcomeController < ApplicationController
+class WelcomeController < ApplicationController
   def home
     # 渲染 html
     # render {html: "<h1>Welcome</h1>"} => {} 可省略
@@ -9,7 +9,7 @@ lclass WelcomeController < ApplicationController
 
     # @lottery = [*1..43].sample(6)
   end
-  # def about
+  def about
     
-  # end
+  end
 end

@@ -8,7 +8,7 @@ class SessionsController < ApplicationController
 
       # 檢查是否已經有 blog
       if user.blog.present?
-        redirect_to '/', notice: "登入成功"
+        redirect_to '/@#{user.blog.handler}', notice: "登入成功"
       else  
         redirect_to new_blog_path, notice: "請先建立 Blog"
       end  

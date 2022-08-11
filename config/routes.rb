@@ -5,9 +5,9 @@ Rails.application.routes.draw do
   # get("/", {to: 'welcome#home'})
   # get "/", {to: 'welcome#home'}
   # get "/", to: 'welcome#home' 
-  get "/", to: 'blogs#index' 
+  get "/", to: 'welcome#home' 
   # get "/about", to: 'welcome#about'
-  get "/about", to: "pages#about" # controller為複數
+  get "/about", to: "welcome#about" # controller為複數
   # "/about", to: "pages#about"
   #get "/about", to: "pages#about"
 
@@ -30,6 +30,10 @@ Rails.application.routes.draw do
                    # , only: [:index, :new] # only 只要顯示 ：index, :new 路徑
                    # , except: [:index, :new] # except 除了 :index, :new 以外，其餘都顯示      
   # 在終端機找路徑可以用 rails routes -c blog 只找到跟 blog 有關的路徑
+
+  get "/@:handler/blogs", to: "blogs#show"
+  get "/@:handler/blogs/:id", to: "articles#show"
+
   resources :comments, only: [:show, :edit, :update, :destroy]
   resources :articles do
     # resources :comments, only: [:index, :new, :create]
@@ -76,7 +80,7 @@ Rails.application.routes.draw do
   # resource :users, except: [:new, :destroy], path: "user" do
   #   get :sign_up
   # end
-
+  get '/@:handler', to: "blogs#show"
 end
 
 # Prefix Verb   URI Pattern              Controller#Action
