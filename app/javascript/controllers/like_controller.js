@@ -24,7 +24,7 @@ export default class extends Controller {
     // 以上放入共用元件 javascript/lib/http/client.js
 
     // stimulus js 提供 this.element: 找出 id 
-    const clientID = this.element.dataset.articleId
+    const clientID = this.element.dataset
     console.log(clientID)
 
     // console.log(axios);

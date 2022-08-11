@@ -1,6 +1,6 @@
 import ax from "axios"
 
-const metaToken = document.querySelector("meta[name=csrf-token")
+const metaToken = document.querySelector("meta[name=csrf-token]")
 
 if (metaToken) {
   const token = metaToken.textContent
