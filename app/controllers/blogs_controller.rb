@@ -1,21 +1,22 @@
 class BlogsController < ApplicationController
   # include UsersHelpero
   before_action :authenticate_user!, except: [:show]
-  def new
-    @blog = Blog.new
-  end
-  
   def show
     @blog = Blog.find_by!(handler: params[:handler])
+
+    # 誰來我家
     if @blog != current_user.blog
       if @blog.visitors.include?(current_user)
+        # 訪客有來過我家，刪除原先紀錄再加進來
         @blog.visitors.destroy(current_user)
       end
 
       @blog.visitors << current_user
     end  
   end
-
+  def new
+    @blog = Blog.new
+  end
   def create
     # @blog = Blog.new(blog_params)
     @blog = current_user.build_blog(blog_params)
@@ -30,6 +31,12 @@ class BlogsController < ApplicationController
   def edit
     
   end
+  def update
+    
+  end
+  def destroy
+
+  end  
   private
   def blog_params
     params.require(:blog).permit(:handler, :title, :description)

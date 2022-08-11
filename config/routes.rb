@@ -5,7 +5,8 @@ Rails.application.routes.draw do
   # get("/", {to: 'welcome#home'})
   # get "/", {to: 'welcome#home'}
   # get "/", to: 'welcome#home' 
-  get "/", to: 'welcome#home' 
+  # get "/", to: 'welcome#home' 
+  root "welcome#home"
   # get "/about", to: 'welcome#about'
   get "/about", to: "welcome#about" # controller為複數
   # "/about", to: "pages#about"
@@ -26,7 +27,7 @@ Rails.application.routes.draw do
 
   # REST 所有的網址都會被當成一種資源
   # resources :blogs(用複數 在檢查routes 時，才不會跟 show 衝突，用單數的話 blog#index 的路徑會變為 blog_index)
-  resources :blogs # , path: "helloworld" 假如要修改路徑名稱可用 path "新路徑名稱"
+  #resources :blogs # , path: "helloworld" 假如要修改路徑名稱可用 path "新路徑名稱"
                    # , only: [:index, :new] # only 只要顯示 ：index, :new 路徑
                    # , except: [:index, :new] # except 除了 :index, :new 以外，其餘都顯示      
   # 在終端機找路徑可以用 rails routes -c blog 只找到跟 blog 有關的路徑
