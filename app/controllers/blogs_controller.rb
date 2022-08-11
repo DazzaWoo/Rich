@@ -1,36 +1,33 @@
 class BlogsController < ApplicationController
   # include UsersHelpero
-
-  before_action :authenticate_user!, only: [:new]
-
-  def index
-    # @articles = Article.where(deleted_at: nil).order(id: :desc)
-    # @articles = Article.avaliable.order(id: :desc)
-    @articles = Article.order(id: :desc)
-    
-    @ad_color1 = "紅"
-    @ad_color2 = "黃"
-    @ad_color3 = "綠"
-  end
+  before_action :authenticate_user!, except: [:show]
   def new
-    # if user_signed_in?
-      @article = Article.new
-    # else
-      # redirect_to sign_in_users_path
-    # end    
+    @blog = Blog.new
   end
+  
+  def show
+    
+  end
+
   def create
-    # 在同一個 action 下，不能重複 render 或 redirect_to，假如都沒有會出現狀態 204 沒有 content，在 rails 中，204 狀態為無回應。
-    # render html: "已成功新增網誌"
+    # @blog = Blog.new(blog_params)
+    @blog = current_user.build_blog(blog_params)
 
-    # 寫入資料庫
-    # redirect_to "/blogs" 
-
-    # render({html: params})
-    render html: params[:content] # params 本身只是看起像 hash ，但本身不是 hash，用字串跟符號都可以取值
-                 # params["content"]
-                 # params.class => ActionController::Parameters
+    if @blog.save
+      redirect_to "/#{@blog.handler}", notice: "已成功建立 Blog"
+    else
+      render :new
+    end
   end
+
+  def edit
+    
+  end
+  private
+  def blog_params
+    params.require(:blog).permit(:handler, :title, :description)
+  end
+  
 end
 
 # symbol 就像一圖騰，看到就會直接聯想到某一個東西， symbol 是一個有名字的物件，就如同數字 2 ，看到就知道是一個數字 2

@@ -4,7 +4,7 @@
 
 class ArticlesController < ApplicationController
 
-  before_action :authenticate_user!, except: [:show, :unlock]
+  before_action :authenticate_user!, except: [:index, :show, :unlock]
 
   # before_action :find_article, only: [:show, :edit, :update, :destroy]
   # before_action :find_article, only: [:show]
@@ -16,6 +16,35 @@ class ArticlesController < ApplicationController
   # rescue 可以為共用的方法，應寫在 ApplicationController 裡
   # 從 controller 層級判斷是否有出現 ActiveRecord::RecordNotFound
   # rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
+
+  def index
+    # @articles = Article.where(deleted_at: nil).order(id: :desc)
+    # @articles = Article.avaliable.order(id: :desc)
+    @articles = Article.order(id: :desc)
+    
+    @ad_color1 = "紅"
+    @ad_color2 = "黃"
+    @ad_color3 = "綠"
+  end
+  def new
+    # if user_signed_in?
+      @article = Article.new
+    # else
+      # redirect_to sign_in_users_path
+    # end    
+  end
+  def create
+    # 在同一個 action 下，不能重複 render 或 redirect_to，假如都沒有會出現狀態 204 沒有 content，在 rails 中，204 狀態為無回應。
+    # render html: "已成功新增網誌"
+
+    # 寫入資料庫
+    # redirect_to "/blogs" 
+
+    # render({html: params})
+    render html: params[:content] # params 本身只是看起像 hash ，但本身不是 hash，用字串跟符號都可以取值
+                 # params["content"]
+                 # params.class => ActionController::Parameters
+  end
 
   def show
     # render html: params

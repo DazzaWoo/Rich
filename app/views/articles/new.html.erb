@@ -1,0 +1,38 @@
+<h1>新增文章</h1>
+
+<%# 建立表單 %>
+<h2>手動產生form authenticity_token</h2>
+<form action="/blogs" method="POST">
+  <%# 自動建立 authenticity_token %>
+  <input type="text" name="authenticity_token" id="">
+  <%# 下行手動建立 authenticity_token %>
+  <%# <input type="text" name="authenticity_token" id="" value="form_authenticity_token"> %>
+  <input type="submit" value="新增"> 
+</form>
+
+<%# form_tag 通常用在不需要連接資料(表單) %>
+<h2>form tag 自動產生 authenticity_token</h2>
+<%= form_tag "/blogs" do %>
+  標題：
+  <input type="text" name="title" id="">
+  內容：
+  <textarea name="content" id="" cols="30" rows="10"></textarea>
+  <input type="submit" value="新增">     
+<% end %>
+
+<h2>form for</h2>
+<%# form_for 假如物件有初始值會自動塞入 %>
+<%= form_for @article do |form| %>  
+  標題：
+  <%= form.text_field :title %>
+  內容：
+  <%= form.text_area :content %>
+
+  <%= form.submit %>
+<% end %>
+  
+<%= render "articles/form", article: @article %>
+  
+
+
+
