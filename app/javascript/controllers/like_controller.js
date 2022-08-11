@@ -10,11 +10,16 @@ import Rails from "@rails/ujs"
 export default class extends Controller {
   static targets = [ "likeButton" ]
 
-  // connect() {
+  connect() {
     // this.outputTarget.textContent = 'Hello, Stimulus!'
-  //   console.log(123);
-  //   console.log("Hello Stimulus JS");
-  // }
+    // console.log(123);
+    // console.log("Hello Stimulus JS");
+    if (this.element.dataset.liked === "true") {
+      console.log('黑');
+    } else {
+      console.log('白');
+    }
+  }
   like_article() {
     // 拿 token
     // const token = document.querySelector("meta[name=csrf-token]").content
@@ -27,16 +32,16 @@ export default class extends Controller {
     // 以上放入共用元件 javascript/lib/http/client.js
 
     // stimulus js 提供 this.element: 找出 id 
-    const clientID = this.element.dataset
-    console.log(clientID)
+    const articleID = this.element.dataset.articleID
+    console.log(articleID)
 
     // console.log(axios);
-    ax.post(`/api/v1/articles/${clientID}/like`)
-      .then(resp => {
-        console.log(resp.data);
-      })
+    // ax.post(`/api/v1/articles/${clientID}/like`)
+    //   .then(resp => {
+    //     console.log(resp.data);
+    //   })
 
-    Ri.ajax({
+    Rails.ajax({
       url: `/api/v1/articles/${articleID}/like`,
       type: 'post',
       // success: (resp) => {
