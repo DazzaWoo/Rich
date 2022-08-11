@@ -2,10 +2,13 @@ import { Controller } from "stimulus"
 // 安裝完 axios 後 import axios
 // import axios from "axios"
 // 改為 import 共用元件（axios 抓到 token）再傳進來
-import ax from "/app/javascript/lib/http/client"
+// import ax from "/app/javascript/lib/http/client"
+// 用 rails/ujs 取代 axios
+import Rails from "@rails/ujs"
+
 
 export default class extends Controller {
-  // static targets = [ "output" ]
+  static targets = [ "likeButton" ]
 
   // connect() {
     // this.outputTarget.textContent = 'Hello, Stimulus!'
@@ -29,8 +32,26 @@ export default class extends Controller {
 
     // console.log(axios);
     ax.post(`/api/v1/articles/${clientID}/like`)
-         .then(resp => {
-           console.log(resp.data);
-         })
+      .then(resp => {
+        console.log(resp.data);
+      })
+
+    Ri.ajax({
+      url: `/api/v1/articles/${articleID}/like`,
+      type: 'post',
+      // success: (resp) => {
+      success: ({ state }) => {
+        console.log(state);
+        if (state === 'liked') {
+          this.likeButton.textContent = "liked"
+        } else {
+          this.likeButton.textContent = "unlike"
+        }
+        // const {state} = resp
+      },
+      error: (err) => {
+        console.log('error');
+      }
+    })     
   }
 }
