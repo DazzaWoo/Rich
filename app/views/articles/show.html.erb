@@ -2,7 +2,7 @@
 
 <section data-controller="like" 
          data-article-id="<%= @article.id %>" 
-         data-liked="true">
+         data-liked="<%= current_user&.liked?(@article) %>">
   <button data-like-target="likeButton" 
           data-action="click->like#like_article">加到最愛</button>
 </section>

@@ -16,9 +16,14 @@ export default class extends Controller {
     // console.log("Hello Stimulus JS");
     if (this.element.dataset.liked === "true") {
       console.log('黑');
+      this.likeButtonTarget.textContent = "liked"
     } else {
       console.log('白');
+      this.likeButtonTarget.textContent = "disliked"
     }
+  }
+  setLiked(flag) {
+    this.likeButtonTarget.textContent = flag ? "liked" : "disliked"
   }
   like_article() {
     // 拿 token
@@ -47,11 +52,12 @@ export default class extends Controller {
       // success: (resp) => {
       success: ({ state }) => {
         console.log(state);
-        if (state === 'liked') {
-          this.likeButton.textContent = "liked"
-        } else {
-          this.likeButton.textContent = "unlike"
-        }
+        // if (state === 'liked') {
+        //   this.likeButtonTarget.textContent = "liked"
+        // } else {
+        //   this.likeButtonTarget.textContent = "unlike"
+        // }
+        
         // const {state} = resp
       },
       error: (err) => {

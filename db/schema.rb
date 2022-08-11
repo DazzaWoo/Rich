@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_08_10_040322) do
+ActiveRecord::Schema.define(version: 2022_08_11_062532) do
 
   create_table "articles", force: :cascade do |t|
     t.string "title"
@@ -22,6 +22,17 @@ ActiveRecord::Schema.define(version: 2022_08_10_040322) do
     t.string "pincode"
     t.index ["deleted_at"], name: "index_articles_on_deleted_at"
     t.index ["user_id"], name: "index_articles_on_user_id"
+  end
+
+  create_table "blogs", force: :cascade do |t|
+    t.string "handler"
+    t.string "title"
+    t.text "description"
+    t.integer "user_id", null: false
+    t.datetime "deleted_at"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_blogs_on_user_id"
   end
 
   create_table "comments", force: :cascade do |t|
@@ -54,6 +65,7 @@ ActiveRecord::Schema.define(version: 2022_08_10_040322) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  add_foreign_key "blogs", "users"
   add_foreign_key "comments", "articles"
   add_foreign_key "comments", "users"
   add_foreign_key "like_articles", "articles"

@@ -1,10 +1,11 @@
 class User < ApplicationRecord
   # relationships
+  has_one :blog
   has_many :articles
   has_many :comments
   has_many :like_articles
   has_many :liked_articles, through: :like_articles, source: :article # 不能照慣例寫實需要另外寫 foreign_key
-
+  
 
   # validation
   validates :email, presence: true, uniqueness: true
@@ -32,6 +33,10 @@ class User < ApplicationRecord
     hased_password = Digest::SHA1.hexdigest("x------#{password}yy")
     find_by(email: email, password: hased_password)
   end
+
+  def liked?(article)
+    liked_articles.include?(article)
+  end  
 
   private
   def encrypt_password
