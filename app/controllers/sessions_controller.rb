@@ -10,7 +10,7 @@ class SessionsController < ApplicationController
       if user.blog.present?
         redirect_to '/@#{user.blog.handler}', notice: "登入成功"
       else  
-        redirect_to new_blog_path, notice: "請先建立 Blog"
+        redirect_to new_blogs_path, notice: "請先建立 Blog"
       end  
     else
       redirect_to "/users/sign_in", notice: "登入失敗"
