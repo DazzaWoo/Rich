@@ -13,7 +13,7 @@ namespace :blog do
       )
       puts "blog #{blog.handler} created"
 
-      10.times {
+      20.times {
         article = u.articles.create(
           title: Faker::Lorem.sentence,
           content: Faker::Lorem.paragraphs(number: 5).join
