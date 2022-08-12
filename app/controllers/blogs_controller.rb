@@ -33,14 +33,23 @@ class BlogsController < ApplicationController
     @blog = current_user.blog
   end
   def update
-    
+    @blog = current_user.blog
+    if @blog.update(blog_params)
+      redirect_to blogs_path(handler: @blog.handler)
+    else
+      render :new
+    end    
   end
   def destroy
 
   end  
   private
   def blog_params
-    params.require(:blog).permit(:handler, :title, :description)
+    if action_name == "update"
+      params.require(:blog).permit(:title, :description)
+    else  
+      params.require(:blog).permit(:handler, :title, :description)
+    end
   end
 end
 
