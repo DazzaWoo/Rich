@@ -1,10 +1,11 @@
 <nav>
   <ul>
-   
     <%# <% if session[:user_session] %> 
     <%# 有登入的話，才將 email 顯數出來 %>
     <% if user_signed_in? %> 
       <li><%= current_user.email %></li>
+      <li><%= link_to "Blog", blogs_path(handler: current_user.blog.handler)  %></li>
+      <li><%= link_to "Album", "#" %></li>
       <li><%= link_to "登出", sessions_path, method: "delete" %></li>
     <% else %>
       <li><%= link_to "登入", sign_in_users_path  %></li>
