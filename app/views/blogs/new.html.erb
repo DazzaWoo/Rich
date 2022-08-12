@@ -1,15 +1,3 @@
 <h1>新增 Blog</h1>
 
-<%= form_with model: @blog do |f| %>
-  <div>
-    識別碼：<%= f.text_field :handler %>
-  </div>
-  <div>
-    站名：<%= f.text_field :title %>
-  </div>
-  <div>
-    描述：<%= f.text_area :description %>
-  </div>
-  <%= f.submit '新增' %>
-<% end %>
-  
+<%= render "form", blog: @blog %>
