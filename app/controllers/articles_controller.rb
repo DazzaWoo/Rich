@@ -41,9 +41,15 @@ class ArticlesController < ApplicationController
     # redirect_to "/blogs" 
 
     # render({html: params})
-    render html: params[:content] # params 本身只是看起像 hash ，但本身不是 hash，用字串跟符號都可以取值
+    #render html: params[:content] # params 本身只是看起像 hash ，但本身不是 hash，用字串跟符號都可以取值
                  # params["content"]
                  # params.class => ActionController::Parameters
+    @article = current_user.articles.new(article_params)
+    if @article.save
+      redirect_to blogs_path(handler: current_user.blog.handler), notice: "Article created!"
+    else
+      render :new
+    end  
   end
 
   def show
