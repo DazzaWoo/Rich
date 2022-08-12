@@ -1,6 +1,12 @@
 <%= form_with model: blog, url: url do |f| %>
   <div>
-    識別碼：<%= f.text_field :handler %>
+    識別碼：
+    <% if blog.new_record? %>
+      <%= f.text_field :handler %>
+      決定後就無法編輯
+    <% else %>  
+      <%= blog.handler %> (不可編輯)
+    <% end %>
   </div>
   <div>
     站名：<%= f.text_field :title %>
