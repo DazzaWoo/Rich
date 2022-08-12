@@ -4,8 +4,10 @@ class BlogsController < ApplicationController
   def show
     @blog = Blog.find_by!(handler: params[:handler])
 
+    @articles = @blog.user.articles
+
     # 誰來我家
-    if @blog != current_user.blog
+    if user_signed_in? && @blog != current_user.blog
       if @blog.visitors.include?(current_user)
         # 訪客有來過我家，刪除原先紀錄再加進來
         @blog.visitors.destroy(current_user)
