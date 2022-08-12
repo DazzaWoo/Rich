@@ -5,10 +5,10 @@
     <% if user_signed_in? %> 
       <li><%= current_user.email %></li>
       <li>
-        <%= link_to "Blog", blogs_path(handler: current_user.blog.handler)  %>
-        <%= link_to "Edit", edit_blogs_path(handler: current_user.blog.handler)  %>
+        <%= link_to "Blog", blogs_path(handler: current_user.blog&.handler) if current_user.blog.present?  %>
+        <%= link_to "Edit", edit_blogs_path(handler: current_user.blog&.handler) if current_user.blog.present? %>
       </li>
-      <li><%= link_to "Album", "#" %></li>
+      <li><%= link_to "Album", "#" if current_user.blog.present? %></li>
       <li><%= link_to "登出", sessions_path, method: "delete" %></li>
     <% else %>
       <li><%= link_to "登入", sign_in_users_path  %></li>

@@ -29,8 +29,9 @@ Rails.application.routes.draw do
   # get "/@:handler/blogs/:id", to: "articles#show"
 
   scope "/:@handler" do
-    resource :blogs
+    resource :blogs, except: [:new, :create]
   end
+  resources :blogs, only: [:new, :create]
 
   # REST 所有的網址都會被當成一種資源
   # resources :blogs(用複數 在檢查routes 時，才不會跟 show 衝突，用單數的話 blog#index 的路徑會變為 blog_index)
