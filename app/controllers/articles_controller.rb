@@ -85,7 +85,7 @@ class ArticlesController < ApplicationController
     @comment = Comment.new
     @comments = @article.comments.order(id: :desc)
   end
-  def create
+  # def create
     # 批次寫入
     # render html: params[:article]
 
@@ -104,16 +104,16 @@ class ArticlesController < ApplicationController
 
     # 從使用者角度創建文章
     # 等同 54、56行
-    @article = current_user.articles.new(article_params)
+    # @article = current_user.articles.new(article_params)
 
 
-    if @article.save
-      redirect_to blogs_path, notice: "文章新增成功"
-    else
+    # if @article.save
+    #   redirect_to blogs_path, notice: "文章新增成功"
+    # else
       # redirect_to '/blogs/new'     
-      render new_blog_path # => 借 app/views/blogs/new.html.erb 來用
-    end
-  end
+  #     render new_blog_path # => 借 app/views/blogs/new.html.erb 來用
+  #   end
+  # end
   def edit
     # @article = Article.find(params[:id])
     # if @article.user != current_user

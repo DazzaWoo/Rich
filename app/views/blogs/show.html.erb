@@ -1,1 +1,12 @@
 <h1><%= @blog.title %></h1> 
+<ul>
+  <% @articles.each do |article| %>
+    <li>
+      <h2><%= article.title %></h2>
+      <article>
+        <%= article.content.truncate(100) %>
+        ...繼續閱讀
+      </article>
+    </li>
+  <% end %>
+</ul>
