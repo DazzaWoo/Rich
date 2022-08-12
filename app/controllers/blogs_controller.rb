@@ -29,7 +29,8 @@ class BlogsController < ApplicationController
   end
 
   def edit
-    
+    # 一個人只有一個blog，找 current_user 的 blog 
+    @blog = current_user.blog
   end
   def update
     
@@ -41,7 +42,6 @@ class BlogsController < ApplicationController
   def blog_params
     params.require(:blog).permit(:handler, :title, :description)
   end
-  
 end
 
 # symbol 就像一圖騰，看到就會直接聯想到某一個東西， symbol 是一個有名字的物件，就如同數字 2 ，看到就知道是一個數字 2
