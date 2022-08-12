@@ -25,15 +25,17 @@ Rails.application.routes.draw do
   # patch "/blog/:id", to: "blog#udpate"
   # delete "/blog/:id", to: "blog#destroy"
 
+  get "/@:handler/blogs", to: "blogs#show"
+  get "/@:handler/blogs/:id", to: "articles#show"
+
   # REST 所有的網址都會被當成一種資源
   # resources :blogs(用複數 在檢查routes 時，才不會跟 show 衝突，用單數的話 blog#index 的路徑會變為 blog_index)
-  #resources :blogs # , path: "helloworld" 假如要修改路徑名稱可用 path "新路徑名稱"
+  resources :blogs # , path: "helloworld" 假如要修改路徑名稱可用 path "新路徑名稱"
                    # , only: [:index, :new] # only 只要顯示 ：index, :new 路徑
                    # , except: [:index, :new] # except 除了 :index, :new 以外，其餘都顯示      
   # 在終端機找路徑可以用 rails routes -c blog 只找到跟 blog 有關的路徑
 
-  get "/@:handler/blogs", to: "blogs#show"
-  get "/@:handler/blogs/:id", to: "articles#show"
+  
 
   resources :comments, only: [:show, :edit, :update, :destroy]
   resources :articles do
