@@ -20,3 +20,4 @@ ActiveStorage.start();
 // });
 
 import "controllers"
+import "../application.css"

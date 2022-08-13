@@ -4,7 +4,8 @@ class BlogsController < ApplicationController
   def show
     @blog = Blog.find_by!(handler: params[:handler])
 
-    @articles = @blog.user.articles.order(id: :desc)
+    # querystring
+    @articles = @blog.user.articles.order(id: :desc).page(params[:page]).per(5)
 
     # 誰來我家
     if user_signed_in? && @blog != current_user.blog
