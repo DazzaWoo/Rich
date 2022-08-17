@@ -6,7 +6,7 @@ class Order < ApplicationRecord
   # validates :state, presence: true
   validates :serial, :price, :state, presence: true
 
-  aasm column: "state" do
+  aasm no_direct_assignment: true, column: "state"  do
     state :pending, initial: true
     state :paid, :fail, :refunded, :cancelled
 
@@ -30,5 +30,13 @@ class Order < ApplicationRecord
   end
 
   private
-  
+  def create_serial
+    # "ORD20220815XXXXXX(0~9a-zA-Z)"
+    now = Time.now
+
+    self.serial = "ORD%d%02d%02d%s" % [now.year,
+                                       now.month,
+                                       now.day,
+                                       SecureRandom.alphanumeric(6)]
+  end
 end
