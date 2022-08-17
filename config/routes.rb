@@ -82,7 +82,7 @@ Rails.application.routes.draw do
   # 建立 sessions
   resource :sessions, only: [:create, :destroy]
 
-  # 用 resource(單數) 在路徑上不會有 id
+  # 用 resource(單數) 在路徑上不會有 id, 也不會有 action#index
   # resource :users 
   # 新增客製化路徑（可放多個）get :sing_up
   resource :users, except: [:new, :destroy] do
