@@ -9,6 +9,8 @@
 <%= form_for article do |form| %>   
   標題：
   <%= form.text_field :title %>
+  發佈日期：
+  <%= form.text_field :publish_at, data: { controller: "datepickr" }  %>
   內容：
   <%= form.text_area :content %>
   密碼：

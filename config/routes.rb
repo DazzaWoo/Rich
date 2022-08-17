@@ -28,6 +28,14 @@ Rails.application.routes.draw do
   # get "/@:handler/blogs", to: "blogs#show"
   # get "/@:handler/blogs/:id", to: "articles#show"
 
+  resource :plans, only: [:show]
+  resources :orders, except: [:edit, :update, :destroy] do
+    member do
+      delete :cancel
+    end
+  end
+
+
   scope "/@:handler" do
     resource :blogs, except: [:new, :create]
   end

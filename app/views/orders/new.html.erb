@@ -1,0 +1,8 @@
+<h1>VIP方案</h1>
+
+<%= form_with model: @order do |f| %>
+  備註說明：
+  <%= f.text_area :note, class: "px-2 py-3 hover:bg-gray-600"%>
+  <%= f.submit '建立訂單', class: "px-2 py-3 hover:bg-red-600 bg-red-500 text-white"%>
+<% end %>
+  

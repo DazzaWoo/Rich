@@ -4,6 +4,7 @@
     <%# 有登入的話，才將 email 顯數出來 %>
     <% if user_signed_in? %> 
       <li><%= current_user.email %></li>
+      <li><%= link_to "升級", plans_path %></li>
       <li>
         <%= link_to "Blog", blogs_path(handler: current_user.blog&.handler) if current_user.blog.present?  %>
         <%= link_to "Edit", edit_blogs_path(handler: current_user.blog&.handler) if current_user.blog.present? %>
