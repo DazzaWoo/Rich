@@ -31,6 +31,7 @@ Rails.application.routes.draw do
   resource :plans, only: [:show]
   resources :orders, except: [:edit, :update, :destroy] do
     member do
+      get :pay
       delete :cancel
     end
   end

@@ -4,7 +4,9 @@ class Order < ApplicationRecord
   # validates :serial, presence: true
   # validates :price, presence: true
   # validates :state, presence: true
-  validates :serial, :price, :state, presence: true
+  validates :price, :state, presence: true
+
+  before_create :create_serial
 
   aasm no_direct_assignment: true, column: "state"  do
     state :pending, initial: true
