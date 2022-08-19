@@ -1,1 +1,11 @@
 <h1><%= order.serial %></h1>
+<%= @token %>
+
+<%= form_with url: pay_order_path(id: @order.serial),
+              method: 'post',
+              data: {
+                controller: ''
+              } do |f| %>
+    
+<% end %>
+  
